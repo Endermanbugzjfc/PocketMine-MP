@@ -57,7 +57,7 @@ use const JSON_PRETTY_PRINT;
 /**
  * Config Class for simple config manipulation of multiple formats.
  */
-class Config{
+class Config implements \ArrayAccess{
 	public const DETECT = -1; //Detect by file extension
 	public const PROPERTIES = 0; // .properties
 	public const CNF = Config::PROPERTIES; // .cnf
@@ -599,5 +599,21 @@ class Config{
 		}
 
 		return $result;
+	}
+
+	public function offsetUnset($k) : void {
+		$this->__unset($k);
+	}
+
+	public function offsetExists($k) : void {
+		$this->__isset($k);
+	}
+
+	public function offsetGet($k) {
+		return $this->__get($k);
+	}
+
+	public function offsetSet($k, $v) : void {
+		$this->__set($k, $v);
 	}
 }
