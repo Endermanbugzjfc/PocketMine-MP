@@ -173,7 +173,7 @@ class RakLibInterface implements ServerInstance, AdvancedSourceInterface{
 				$logger->debug("Packet " . (isset($pk) ? get_class($pk) : "unknown") . ": " . base64_encode($packet->buffer));
 				$logger->logException($e);
 
-				$player->close($player->getLeaveMessage(), $e->getError() . ' in ' . $e->getFile() . ' at line ' . $e->getLine());
+				$player->close($player->getLeaveMessage(), $e->getMessage() . ' in ' . $e->getFile() . ' at line ' . $e->getLine());
 				$this->interface->blockAddress($address, 5);
 			}
 		}
